@@ -1,4 +1,4 @@
-# 🔗 Short URL — Joomla 6 System Plugin
+# 🔗 Binev Short URL — Joomla 6 System Plugin
 
 پلاگین سیستمی جوملا ۶ برای ایجاد لینک کوتاه خودکار مطالب.
 

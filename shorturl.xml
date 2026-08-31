@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="plugin" group="system" method="upgrade">
-    <name>PLG_SYSTEM_SHORTURL</name>
-    <version>1.2.2</version>
+    <name>Binev Short URL</name>
+    <version>1.2.3</version>
     <creationDate>2026-08-31</creationDate>
-    <author>Your Name</author>
-    <authorEmail>info@example.com</authorEmail>
-    <copyright>Copyright (C) 2026. All rights reserved.</copyright>
+    <author>Bahram PAB</author>
+    <authorEmail>info@binev.ir</authorEmail>
+    <copyright>Copyright (C) 2026 Binev. All rights reserved.</copyright>
     <license>GNU General Public License version 2 or later</license>
-    <description>PLG_SYSTEM_SHORTURL_DESCRIPTION</description>
+    <description>Binev Short URL — automatically generate short links for Joomla articles with redirect support.</description>
 
     <files>
         <filename plugin="shorturl">shorturl.php</filename>
