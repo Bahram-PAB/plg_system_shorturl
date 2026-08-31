@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="plugin" group="system" method="upgrade">
     <name>PLG_SYSTEM_SHORTURL</name>
-    <version>1.2.1</version>
+    <version>1.2.2</version>
     <creationDate>2026-08-31</creationDate>
     <author>Your Name</author>
     <authorEmail>info@example.com</authorEmail>
