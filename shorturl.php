@@ -61,7 +61,7 @@ class PlgSystemShorturl extends CMSPlugin
                 $form->loadFile($formPath);
             }
 
-            Factory::getDocument()->addScriptDeclaration($this->getArticleBannerJs());
+            Factory::getDocument()->addScriptDeclaration($this->getShortUrlTabJs());
             return;
         }
 
@@ -279,32 +279,44 @@ class PlgSystemShorturl extends CMSPlugin
     // ------------------------------------------------------------------
 
     /**
-     * Banner at the top of the article edit form showing the short URL.
+     * Render short URL inside the "Short URL" tab (attrib-shorturl).
+     * Reads the value from the hidden field populated by onContentPrepareData.
      */
-    private function getArticleBannerJs(): string
+    private function getShortUrlTabJs(): string
     {
-        $label      = Text::_('PLG_SYSTEM_SHORTURL_SHORT_URL');
-        $copyLabel  = Text::_('PLG_SYSTEM_SHORTURL_COPY');
-        $newLabel   = Text::_('PLG_SYSTEM_SHORTURL_AFTER_SAVE');
+        $copyLabel  = addslashes(Text::_('PLG_SYSTEM_SHORTURL_COPY'));
+        $pendingMsg = addslashes(Text::_('PLG_SYSTEM_SHORTURL_PENDING'));
+        $label      = addslashes('Short URL');
 
         return <<<JS
 (function(){
-function init(){
-var f=document.getElementById("jform_short_url")||document.querySelector('[name="jform[short_url]"]');
-if(!f)return;
-var b=document.createElement("div");
-b.style.cssText="background:#e7f3ff;border:1px solid #b8daff;border-radius:6px;padding:12px 16px;margin:12px 0;display:flex;align-items:center;gap:10px;flex-wrap:wrap;";
-var lbl=document.createElement("strong");lbl.innerHTML="🔗 {$label}:";b.appendChild(lbl);
-if(f.value){
-var a=document.createElement("a");a.href=f.value;a.textContent=f.value;a.target="_blank";a.rel="noopener";a.style.cssText="word-break:break-all;";b.appendChild(a);
-var btn=document.createElement("button");btn.type="button";btn.textContent="{$copyLabel}";
-btn.style.cssText="border:1px solid #0d6efd;background:#fff;color:#0d6efd;border-radius:4px;padding:2px 10px;cursor:pointer;font-size:13px;white-space:nowrap;";
-btn.onclick=function(){navigator.clipboard.writeText(a.href);this.textContent="✓";var s=this;setTimeout(function(){s.textContent="{$copyLabel}"},1500);};
-b.appendChild(btn);
-}else{var h=document.createElement("span");h.textContent="{$newLabel}";h.style.cssText="color:#666;font-style:italic;";b.appendChild(h);}
-var form=document.getElementById("item-form");if(form)form.insertBefore(b,form.querySelector(".main-card")||form.firstChild);
+function render(){
+  var field=document.querySelector('[name="jform[short_url]"]');
+  var pane=document.getElementById('attrib-shorturl');
+  if(!pane)return;
+  var url=field?field.value:'';
+  if(!url){
+    pane.innerHTML='<div style="border:1px dashed #ccc;border-radius:8px;padding:18px;margin:10px;text-align:center;color:#999;font-size:14px;">{$pendingMsg}</div>';
+    return;
+  }
+  var box=document.createElement('div');
+  box.style.cssText='border:2px solid #dee2e6;border-radius:8px;padding:18px 14px;margin:10px;position:relative;';
+  var lbl=document.createElement('div');
+  lbl.style.cssText='position:absolute;top:-11px;left:12px;background:#fff;padding:0 6px;font-weight:600;color:#666;font-size:13px;';
+  lbl.textContent='{$label}';
+  box.appendChild(lbl);
+  var a=document.createElement('a');a.href=url;a.textContent=url;a.target='_blank';a.rel='noopener';
+  a.style.cssText='word-break:break-all;color:#0d6efd;text-decoration:none;font-size:14px;';
+  a.onmouseenter=function(){this.style.textDecoration='underline';};
+  a.onmouseleave=function(){this.style.textDecoration='none';};
+  box.appendChild(a);
+  var btn=document.createElement('button');btn.type='button';btn.textContent='{$copyLabel}';
+  btn.style.cssText='border:1px solid #0d6efd;background:#fff;color:#0d6efd;border-radius:4px;padding:3px 12px;cursor:pointer;font-size:13px;white-space:nowrap;vertical-align:middle;margin-left:8px;';
+  btn.onclick=function(){navigator.clipboard.writeText(url);this.textContent='\\u2713';var s=this;setTimeout(function(){s.textContent='{$copyLabel}';},1500);};
+  box.appendChild(btn);
+  pane.innerHTML='';pane.appendChild(box);
 }
-if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',render);else render();
 })();
 JS;
     }
