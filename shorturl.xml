@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="plugin" group="system" method="upgrade">
+    <name>PLG_SYSTEM_SHORTURL</name>
+    <version>1.2.1</version>
+    <creationDate>2026-08-31</creationDate>
+    <author>Your Name</author>
+    <authorEmail>info@example.com</authorEmail>
+    <copyright>Copyright (C) 2026. All rights reserved.</copyright>
+    <license>GNU General Public License version 2 or later</license>
+    <description>PLG_SYSTEM_SHORTURL_DESCRIPTION</description>
+
+    <files>
+        <filename plugin="shorturl">shorturl.php</filename>
+        <folder>forms</folder>
+        <folder>sql</folder>
+    </files>
+
+    <languages folder="language">
+        <language tag="en-GB">en-GB/plg_system_shorturl.ini</language>
+        <language tag="en-GB">en-GB/plg_system_shorturl.sys.ini</language>
+        <language tag="fa-IR">fa-IR/plg_system_shorturl.ini</language>
+        <language tag="fa-IR">fa-IR/plg_system_shorturl.sys.ini</language>
+    </languages>
+
+    <install>
+        <sql>
+            <file driver="mysql" charset="utf8">sql/install.sql</file>
+        </sql>
+    </install>
+
+    <uninstall>
+        <sql>
+            <file driver="mysql" charset="utf8">sql/uninstall.sql</file>
+        </sql>
+    </uninstall>
+
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+                <field name="prefix" type="text" default=""
+                       label="PLG_SYSTEM_SHORTURL_FIELD_PREFIX"
+                       description="PLG_SYSTEM_SHORTURL_FIELD_PREFIX_DESC" />
+                <field name="length" type="number" default="6"
+                       label="PLG_SYSTEM_SHORTURL_FIELD_LENGTH"
+                       description="PLG_SYSTEM_SHORTURL_FIELD_LENGTH_DESC"
+                       min="4" max="10" />
+                <field name="charset" type="list" default="alnum"
+                       label="PLG_SYSTEM_SHORTURL_FIELD_CHARSET">
+                    <option value="alnum">PLG_SYSTEM_SHORTURL_FIELD_CHARSET_ALNUM</option>
+                    <option value="alpha">PLG_SYSTEM_SHORTURL_FIELD_CHARSET_ALPHA</option>
+                    <option value="numeric">PLG_SYSTEM_SHORTURL_FIELD_CHARSET_NUMERIC</option>
+                </field>
+            </fieldset>
+            <fieldset name="help" label="PLG_SYSTEM_SHORTURL_HELP_TAB">
+                <field name="help_note" type="note" label=""
+                       description="PLG_SYSTEM_SHORTURL_HELP" />
+            </fieldset>
+        </fields>
+    </config>
+</extension>
