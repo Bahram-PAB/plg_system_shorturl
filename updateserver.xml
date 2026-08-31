@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<updates>
+    <update>
+        <name>Binev Short URL</name>
+        <version>1.2.4</version>
+        <infourl title="Binev Short URL Changelog">
+            https://github.com/Bahram-PAB/plg_system_shorturl/releases
+        </infourl>
+        <downloadurl>https://github.com/Bahram-PAB/plg_system_shorturl/releases/download/v1.2.4/joomla-shorturl-v1.2.4.zip</downloadurl>
+        <targetplatform version="6.*"/>
+        <php_minimum>8.1</php_minimum>
+    </update>
+</updates>

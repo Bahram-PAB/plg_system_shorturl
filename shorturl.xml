@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="plugin" group="system" method="upgrade">
     <name>Binev Short URL</name>
-    <version>1.2.3</version>
+    <version>1.2.4</version>
     <creationDate>2026-08-31</creationDate>
     <author>Bahram PAB</author>
     <authorEmail>info@binev.ir</authorEmail>
@@ -57,4 +57,8 @@
             </fieldset>
         </fields>
     </config>
+
+    <update>
+        <server>https://raw.githubusercontent.com/Bahram-PAB/plg_system_shorturl/main/updateserver.xml</server>
+    </update>
 </extension>
