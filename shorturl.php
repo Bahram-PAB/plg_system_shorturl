@@ -1,5 +1,12 @@
 <?php
 /**
+ * @package     Binev Short URL
+ * @subpackage  System Plugin
+ * @copyright   Copyright (C) 2026 Binev. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+
+/**
  * System - Short URL Plugin for Joomla 6
  * کوتاه‌کننده لینک مطالب جوملا
  *
